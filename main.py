@@ -1,9 +1,22 @@
 import flask
+from flask_peewee.db import Database
+from flask_peewee.auth import Auth
+from flask_peewee.admin import Admin
 
+DATABASE = {
+    'name': 'pizza.db',
+    'engine': 'peewee.SqliteDatabase'
+}
 SECRET_KEY = 'afagfasgasgagfagsa'
 
 app = flask.Flask(__name__) 
 app.config.from_object(__name__)
+
+db = Database(app)
+auth = Auth(app, db)
+admin = Admin(app, auth)
+
+admin.setup()
 
 class Pizza:
 
@@ -18,7 +31,6 @@ pizzas = [
     Pizza('siera', 'siers', 20, 5),
     Pizza('margarita', 'siers', 45, 20),
 ]
-
 
 @app.route('/')
 def home():
@@ -71,5 +83,6 @@ def my_cart():
     cart_pizzas = [pizzas[i] for i in cart]
     return flask.render_template('my_cart.html', pizzas=cart_pizzas)
 
-
-app.run(debug=True)
+if __name__ == '__main__':
+    auth.User.create_table(fail_silently=True)
+    app.run(debug=True)
