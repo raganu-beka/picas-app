@@ -1,0 +1,9 @@
+<h3>Pica: {{ pizza.name }}</h3>
+<p>Ingredienti: {{ pizza.ingredients }}</p>
+<p>Izmērs: {{ pizza.size }}</p>
+<p>Cena: {{ pizza.price }}</p>
+
+<form action="{{ url_for('buy_pizza') }}" method="post">
+    <input type="text" value="{{ pizza_id }}" name="pizza_id" hidden>
+    <input type="submit" value="Pievienot grozam!">
+</form>

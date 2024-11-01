@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picas veikals!</title>
+
+</head>
+<body>
+    <a href="{{ url_for('create_pizza') }}">IZVEIDOT PICU</a>
+
+    <ul>
+        {% for pizza in pizzas %}
+        <li>
+            <h3><a href="{{ url_for('get_pizza', id=pizzas.index(pizza)) }}">Pica: {{ pizza.name }}</a></h3>
+            <p>Cena: {{ pizza.price }}</p>
+            <p>Izmērs: {{ pizza.size }}</p>
+        </li>
+        {% endfor %}  
+    </ul>
+
+</body>
+</html>

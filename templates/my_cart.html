@@ -1,0 +1,9 @@
+<ul>
+    {% for pizza in pizzas %}
+    <li>
+        <h3><a href="{{ url_for('get_pizza', id=pizzas.index(pizza)) }}">Pica: {{ pizza.name }}</a></h3>
+        <p>Cena: {{ pizza.price }}</p>
+        <p>Izmērs: {{ pizza.size }}</p>
+    </li>
+    {% endfor %}  
+</ul>
