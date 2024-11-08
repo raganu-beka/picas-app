@@ -2,6 +2,7 @@ import flask
 from flask_peewee.db import Database
 from flask_peewee.auth import Auth
 from flask_peewee.admin import Admin
+from peewee import TextField
 
 DATABASE = {
     'name': 'pizza.db',
@@ -16,7 +17,13 @@ db = Database(app)
 auth = Auth(app, db)
 admin = Admin(app, auth)
 
+
+class Pizzas(db.Model):
+    name = TextField()
+
+
 admin.setup()
+
   
 class Pizza:
 
