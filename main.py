@@ -93,6 +93,8 @@ def my_cart():
     cart_pizzas = [pizzas[i] for i in cart]
     return flask.render_template('my_cart.html', pizzas=cart_pizzas)
 
+
 if __name__ == '__main__':
     auth.User.create_table(fail_silently=True)
+    Pizzas.create_table(fail_silently=True)
     app.run(debug=True)
