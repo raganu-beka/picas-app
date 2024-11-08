@@ -2,7 +2,7 @@ import flask
 from flask_peewee.db import Database
 from flask_peewee.auth import Auth
 from flask_peewee.admin import Admin
-from peewee import TextField
+from peewee import TextField, IntegerField, FloatField
 
 DATABASE = {
     'name': 'pizza.db',
@@ -20,6 +20,9 @@ admin = Admin(app, auth)
 
 class Pizzas(db.Model):
     name = TextField()
+    ingredients = TextField()
+    size = IntegerField()
+    price = FloatField()
 
 
 admin.setup()
