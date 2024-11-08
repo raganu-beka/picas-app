@@ -1,6 +1,7 @@
 import flask
 from flask_peewee.db import Database
 from flask_peewee.auth import Auth
+from flask_peewee.admin import Admin
 
 DATABASE = {
     'name': 'pizza.db',
@@ -13,8 +14,10 @@ app.config.from_object(__name__)
 
 db = Database(app)
 auth = Auth(app, db)
+admin = Admin(app, auth)
 
-
+admin.setup()
+  
 class Pizza:
 
     def __init__(self, name, ingredients, size, price):
