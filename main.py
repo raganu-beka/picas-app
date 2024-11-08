@@ -31,44 +31,16 @@ class PizzaAdmin(ModelAdmin):
 admin.register(Pizzas, PizzaAdmin)
 admin.setup()
 
-  
-class Pizza:
-
-    def __init__(self, name, ingredients, size, price):
-        self.name = name
-        self.ingredients = ingredients
-        self.size = size
-        self.price = price
-
-
-pizzas = [
-    Pizza('siera', 'siers', 20, 5),
-    Pizza('margarita', 'siers', 45, 20),
-]
 
 @app.route('/')
 def home():
+    pizzas = Pizzas.select()
     return flask.render_template('home.html', pizzas=pizzas)
-
-
-@app.route('/create_pizza', methods=['GET', 'POST'])
-def create_pizza():
-    if flask.request.method == 'POST':
-        new_pizza = Pizza(
-            name=flask.request.form.get('pizza_name'),
-            ingredients=flask.request.form.get('ingredients'),
-            size=int(flask.request.form.get('size')),
-            price=float(flask.request.form.get('price'))
-        )
-        pizzas.append(new_pizza)
-        return flask.redirect(flask.url_for('home'))
-
-    return flask.render_template('create_pizza.html')
 
 
 @app.route('/get_pizza/<int:id>')
 def get_pizza(id):
-    pizza = pizzas[id]
+    pizza = Pizzas.get_by_id(id)
     return flask.render_template('get_pizza.html',
                                  pizza=pizza, pizza_id=id)
 
@@ -94,7 +66,7 @@ def my_cart():
     else:
         cart = []
 
-    cart_pizzas = [pizzas[i] for i in cart]
+    cart_pizzas = [Pizzas.get_by_id(id) for i in cart]
     return flask.render_template('my_cart.html', pizzas=cart_pizzas)
 
 
