@@ -1,7 +1,7 @@
 import flask
 from flask_peewee.db import Database
 from flask_peewee.auth import Auth
-from flask_peewee.admin import Admin
+from flask_peewee.admin import Admin, ModelAdmin
 from peewee import TextField, IntegerField, FloatField
 
 DATABASE = {
@@ -24,7 +24,11 @@ class Pizzas(db.Model):
     size = IntegerField()
     price = FloatField()
 
+class PizzaAdmin(ModelAdmin):
+    columns: ('name')
 
+
+admin.register(Pizzas, PizzaAdmin)
 admin.setup()
 
   
