@@ -70,6 +70,16 @@ def my_cart():
     return flask.render_template('my_cart.html', pizzas=cart_pizzas)
 
 
+@app.route('/create_admin')
+def create_admin():
+    auth.User.create_table(fail_silently=True)
+    admin = auth.User(username='admin', email='', admin=True, active=True)
+    admin.set_password('admin')
+    admin.save()
+
+    return 'admin created'
+
+
 if __name__ == '__main__':
     auth.User.create_table(fail_silently=True)
     Pizzas.create_table(fail_silently=True)
