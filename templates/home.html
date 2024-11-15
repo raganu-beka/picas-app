@@ -13,6 +13,9 @@
             <h3><a href="{{ url_for('get_pizza', id=pizza.get_id())}}">Pica: {{ pizza.name }}</a></h3>
             <p>Cena: {{ pizza.price }}</p>
             <p>Izmērs: {{ pizza.size }}</p>
+            {% if pizza.picture %}
+            <img src="{{ url_for('static', filename=pizza.picture) }}" alt="">
+            {% endif %}
         </li>
         {% endfor %}  
     </ul>
