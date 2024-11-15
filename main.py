@@ -66,7 +66,7 @@ def create_pizza():
 
             new_pizza = Pizzas(name=name, price=price,
                                ingredients=ingredients, size=size,
-                               filename=filename)
+                               picture=filename)
             
         else:
             new_pizza = Pizzas(name=name, price=price,
