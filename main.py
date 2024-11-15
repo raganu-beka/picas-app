@@ -27,6 +27,7 @@ class Pizzas(db.Model):
     ingredients = TextField()
     size = IntegerField()
     price = FloatField()
+    picture = TextField(null=True)
 
 class PizzaAdmin(ModelAdmin):
     columns: ('name')
@@ -62,6 +63,17 @@ def create_pizza():
             filename = secure_filename(file.filename)
             filepath = os.path.abspath(app.root_path + '/static/' + filename)
             file.save(filepath)
+
+            new_pizza = Pizzas(name=name, price=price,
+                               ingredients=ingredients, size=size,
+                               filename=filename)
+            
+        else:
+            new_pizza = Pizzas(name=name, price=price,
+                               ingredients=ingredients, size=size)
+            
+        new_pizza.save()
+        flask.redirect(flask.url_for('home'))
             
 
     return flask.render_template('create_pizza.html')
