@@ -4,6 +4,10 @@ from flask_peewee.auth import Auth
 from flask_peewee.admin import Admin, ModelAdmin
 from peewee import TextField, IntegerField, FloatField
 
+from werkzeug.utils import secure_filename
+
+import os
+
 DATABASE = {
     'name': 'pizza.db',
     'engine': 'peewee.SqliteDatabase'
@@ -54,7 +58,11 @@ def create_pizza():
         size = int(flask.request.form.get('size'))
 
         if 'picture' in flask.request.files:
-            pass
+            file = flask.request.files['picture']
+            filename = secure_filename(file.filename)
+            filepath = os.path.abspath(app.root_path + '/static/' + filename)
+            file.save(filepath)
+            
 
     return flask.render_template('create_pizza.html')
 
