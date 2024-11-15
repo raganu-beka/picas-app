@@ -45,6 +45,20 @@ def get_pizza(id):
                                  pizza=pizza, pizza_id=id)
 
 
+@app.route('/create_pizza', methods=['GET', 'POST'])
+def create_pizza():
+    if flask.request.method == 'POST':
+        name = flask.request.form.get('pizza_name')
+        price = float(flask.request.form.get('price'))
+        ingredients = flask.request.form.get('ingredients')
+        size = int(flask.request.form.get('size'))
+
+        if 'picture' in flask.request.files:
+            pass
+
+    return flask.render_template('create_pizza.html')
+
+
 @app.route('/buy_pizza', methods=['POST'])
 def buy_pizza():
     pizza_id = flask.request.form.get('pizza_id')
@@ -66,7 +80,7 @@ def my_cart():
     else:
         cart = []
 
-    cart_pizzas = [Pizzas.get_by_id(id) for i in cart]
+    cart_pizzas = [Pizzas.get_by_id(i) for i in cart]
     return flask.render_template('my_cart.html', pizzas=cart_pizzas)
 
 
