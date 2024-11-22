@@ -5,3 +5,9 @@
 .bg-steel {
     background-color: #f93f61;
 }
+
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+}
