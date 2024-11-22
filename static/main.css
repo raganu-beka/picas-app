@@ -1,3 +1,7 @@
 .site-header .navbar-nav .nav-link {
     color: #f93f61;
 }
+
+.bg-steel {
+    background-color: #f93f61;
+}
