@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <ul>
-        {% for pizza in pizzas %}
-        <li>
-            <h3><a href="{{ url_for('get_pizza', id=pizza.get_id())}}">Pica: {{ pizza.name }}</a></h3>
-            <p>Cena: {{ pizza.price }}</p>
-            <p>Izmērs: {{ pizza.size }}</p>
+    <div>
+    {% for pizza in pizzas %}
+    <article class="media content-section">
+        <div class="media-body">
+            <h2><a class="article-title" href="{{ url_for('get_pizza', id=pizza.id) }}">{{ pizza.name }}</a></h2>
+            <p class="article-content">Cena: {{ pizza.price }} EUR</p>
             {% if pizza.picture %}
-            <img src="{{ url_for('static', filename=pizza.picture) }}" alt="">
+            <br>
+            <div><img src="{{ url_for('static', filename=pizza.picture) }}" alt=""></div>
             {% endif %}
-        </li>
-        {% endfor %}  
-    </ul>
+        </div>
+    </article>
+    {% endfor %}
+    </div>
 {% endblock %}
