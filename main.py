@@ -6,6 +6,10 @@ from peewee import TextField, IntegerField, FloatField
 
 from werkzeug.utils import secure_filename
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, EmailField
+from wtforms.validators import DataRequired, Length
+
 import os
 
 DATABASE = {
@@ -29,12 +33,25 @@ class Pizzas(db.Model):
     price = FloatField()
     picture = TextField(null=True)
 
+
 class PizzaAdmin(ModelAdmin):
     columns: ('name')
 
 
 admin.register(Pizzas, PizzaAdmin)
 admin.setup()
+
+
+class UserRegisterForm(FlaskForm):
+    username = StringField('Username', validators=[
+        Length(min=6, max=20), DataRequired()
+    ])
+    email = EmailField('E-mail', validators=[
+        DataRequired()
+    ])
+    password = PasswordField('Password', validators=[
+        Length(min=10, max=32), DataRequired()
+    ])
 
 
 @app.route('/')
@@ -112,6 +129,11 @@ def create_admin():
     admin.save()
 
     return 'admin created'
+
+
+@app.route('/register')
+def register():
+    return flask.render_template('register.html')
 
 
 if __name__ == '__main__':
