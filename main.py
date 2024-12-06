@@ -74,6 +74,7 @@ def get_pizza(id):
 
 
 @app.route('/create_pizza', methods=['GET', 'POST'])
+@auth.admin_required
 def create_pizza():
     if flask.request.method == 'POST':
         name = flask.request.form.get('pizza_name')
@@ -103,6 +104,7 @@ def create_pizza():
 
 
 @app.route('/buy_pizza', methods=['POST'])
+@auth.login_required
 def buy_pizza():
     pizza_id = flask.request.form.get('pizza_id')
 
@@ -117,6 +119,7 @@ def buy_pizza():
 
 
 @app.route('/my_cart')
+@auth.login_required
 def my_cart():
     if 'cart' in flask.session:
         cart = flask.session['cart']
