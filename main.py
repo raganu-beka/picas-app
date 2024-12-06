@@ -7,7 +7,7 @@ from peewee import TextField, IntegerField, FloatField
 from werkzeug.utils import secure_filename
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, FloatField
+from wtforms import StringField, PasswordField, EmailField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 import os
