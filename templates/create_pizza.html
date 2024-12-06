@@ -1,8 +1,9 @@
 <form action="" method="post" enctype="multipart/form-data">
-    Nosaukums: <input type="text" name="pizza_name"> <br>
-    Izmērs: <input type="number" min="18" max="45" name="size"> <br>
-    Sastāvdaļās: <textarea name="ingredients"></textarea> <br>
-    Cena: <input type="number" name="price"> <br>
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name() }} <br>
+    {{ form.size.label }} {{ form.size() }} <br>
+    {{ form.ingredients.label }} {{ form.ingredients() }} <br>
+    {{ form.price.label }} {{ form.price() }} <br>
     Bilde: <input type="file" name="picture" accept="image/png, image/jpeg"> <br>
     <input type="submit" value="Pievienot picu sarakstam!">
 </form>
