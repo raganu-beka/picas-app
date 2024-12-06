@@ -140,7 +140,7 @@ def create_admin():
 @app.route('/register')
 def register():
     form = UserRegistrationForm()
-    flask.render_template('register.html', form=form)
+    return flask.render_template('register.html', form=form)
 
 
 if __name__ == '__main__':
