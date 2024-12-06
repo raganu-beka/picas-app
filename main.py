@@ -50,7 +50,7 @@ class UserRegistrationForm(FlaskForm):
     password = PasswordField('Password',
                              validators=[DataRequired(), Length(min=8, max=32)])
     confirm_password = PasswordField('Confirm password',
-                                     validators=[DataRequired(), EqualTo(password)])
+                                     validators=[DataRequired(), EqualTo('password')])
 
 
 class CreatePizaaForm(FlaskForm):
@@ -152,8 +152,7 @@ def register():
         user.set_password(password)
         user.save()
 
-        return flask.redirect(flask.url_for('home'))
-    
+        return flask.redirect(flask.url_for('home')) 
 
     return flask.render_template('register.html', form=form)
 
