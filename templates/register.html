@@ -3,10 +3,10 @@
 <div>
   <form action="" method="post">
     {{ form.csrf_token }}
-    {{ form.label.username }} {{ form.username() }} <br>
-    {{ form.label.email }} {{ form.email() }} <br>
-    {{ form.label.password }} {{ form.password() }} <br>
-    {{ form.label.confirm_password }} {{ form.confirm_password() }} <br>
+    {{ form.username.label }} {{ form.username() }} <br>
+    {{ form.email.label }} {{ form.email() }} <br>
+    {{ form.password.label }} {{ form.password() }} <br>
+    {{ form.confirm_password.label }} {{ form.confirm_password() }} <br>
     <input type="submit" value="Reģistrēties!">
   </form>
 </div>
