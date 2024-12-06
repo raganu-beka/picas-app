@@ -7,7 +7,7 @@ from peewee import TextField, IntegerField, FloatField
 from werkzeug.utils import secure_filename
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField
+from wtforms import StringField, PasswordField, EmailField, FloatField as FF
 from wtforms.validators import DataRequired, Length, EqualTo
 
 import os
@@ -51,6 +51,13 @@ class UserRegistrationForm(FlaskForm):
                              validators=[DataRequired(), Length(min=8, max=32)])
     confirm_password = PasswordField('Confirm password',
                                      validators=[DataRequired(), EqualTo('password')])
+
+
+class CreatePizzaForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    ingredients = StringField('Ingredients', validators=[DataRequired()])
+    size = FF('Size', validators=[DataRequired()])
+    price = FF('Price', validators=[DataRequired()])
 
 
 class CreatePizaaForm(FlaskForm):
