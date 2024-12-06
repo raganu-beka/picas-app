@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <form action="" method="post">
+    {{ form.csrf_token }}
+    {{ form.label.username }} {{ form.username() }} <br>
+    {{ form.label.email }} {{ form.email() }} <br>
+    {{ form.label.password }} {{ form.password() }} <br>
+    {{ form.label.confirm_password }} {{ form.confirm_password() }} <br>
+    <input type="submit" value="Reģistrēties!">
+  </form>
+</div>
+{% endblock %}
