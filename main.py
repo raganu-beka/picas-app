@@ -60,7 +60,7 @@ class CreatePizzaForm(FlaskForm):
     price = FF('Price', validators=[DataRequired()])
 
 
-class CreatePizaaForm(FlaskForm):
+class CreatePizzaForm(FlaskForm):
     name = StringField('Name')
     price = FloatField('Price')
     ingredients = StringField('Ingredients')
@@ -83,6 +83,8 @@ def get_pizza(id):
 @app.route('/create_pizza', methods=['GET', 'POST'])
 @auth.admin_required
 def create_pizza():
+    form = CreatePizzaForm()
+
     if flask.request.method == 'POST':
         name = flask.request.form.get('pizza_name')
         price = float(flask.request.form.get('price'))
@@ -107,7 +109,8 @@ def create_pizza():
         flask.redirect(flask.url_for('home'))
             
 
-    return flask.render_template('create_pizza.html')
+    return flask.render_template('create_pizza.html',
+                                 form=form)
 
 
 @app.route('/buy_pizza', methods=['POST'])
