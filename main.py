@@ -137,9 +137,24 @@ def create_admin():
     return 'admin created'
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = UserRegistrationForm()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+
+        user = auth.User(username=username,
+                         email=email,
+                         admin=False, active=True)
+        user.set_password(password)
+        user.save()
+
+        return flask.redirect(flask.url_for('home'))
+    
+
     return flask.render_template('register.html', form=form)
 
 
